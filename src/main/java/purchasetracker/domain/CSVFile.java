@@ -193,7 +193,7 @@ public class CSVFile {
 		
 	}
 
-	public final class Row {
+	public static final class Row {
 
 		private List<Field> data;
 
