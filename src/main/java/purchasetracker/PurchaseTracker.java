@@ -60,8 +60,8 @@ public class PurchaseTracker {
 		
 	}
 	
-	// no required external container to start and use this application. though you can always instanciate a new appconfig
-	// and pass it to any war
+	// no required external container to start and use this application. though you can always instantiate a new appconfig
+	// and pass it to any war see the tests for example
 	public static void main(String[] args) {
 
                 // decided to go with grizzly instead of jetty since its configuration with jersey is much easier

@@ -2,12 +2,12 @@ package purchasetracker.domain;
 
 import java.util.Set;
 
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,7 +20,8 @@ public class Purchaser {
 	@Column(unique=true, name="NAME")
 	private String name;
 
-	@OneToMany(cascade=ALL, mappedBy="Purchaser")
+	@JoinTable
+	@OneToMany
 	private Set<Product> purchasedProducts;
 	
 	public long getId(){
