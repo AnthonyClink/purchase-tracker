@@ -16,7 +16,7 @@
 
 			<!-- Provider-specific connection properties -->
 			
-			<!-- recreate the database each time the application is started
+			<!-- recreate the database each time the application is started -->
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:target/derbydb2;create=true" />
 			
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
