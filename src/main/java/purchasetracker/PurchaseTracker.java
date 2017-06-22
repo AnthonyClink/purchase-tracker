@@ -24,11 +24,12 @@ public class PurchaseTracker {
 	public static final String ROOT_PATH = "legacy";
 	private static final Logger LOGGER = Logger.getLogger(PurchaseTracker.class.getName());
 
+	//This is the main application injector configuration for the Hk2 injector from jersey
 	public static class ApplicationBinder extends AbstractBinder{
 
 		@Override
 		protected void configure() {
-			
+			// bind(IMPL) does not work like it does in guice :(
 			bind(PurchaserDataComponent.class).to(PurchaserDataComponent.class);
 			bind(CompanyDataComponent.class).to(CompanyDataComponent.class);
 			bind(ProductDataComponent.class).to(ProductDataComponent.class);
@@ -38,21 +39,33 @@ public class PurchaseTracker {
 		
 	}
 	
+	// this is the main HTTP configuration for jersey resources
 	public static class ApplicationConfig extends ResourceConfig{
 		
 		public ApplicationConfig(){
+			//this is where the injector configuration is added to the http config
+			// this causes the first http call to init the entire container... may cause the first call to take a while
 			register(new ApplicationBinder());
+			
+			// add the multipart jeresy extension to the http layer
 			register(MultiPartFeature.class);
+			
+			// add our custom http resource containing our post call
 			register(LegacyDataResource.class);
+			
+			// set all the jersey internal loggers
 			registerInstances(new LoggingFilter(LOGGER, true));
 			
 		}
 		
 	}
 	
+	// no required external container to start and use this application. though you can always instanciate a new appconfig
+	// and pass it to any war
 	public static void main(String[] args) {
 
-
+                // decided to go with grizzly instead of jetty since its configuration with jersey is much easier
+		// as you can see here
 		final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, new ApplicationConfig());
 
 		System.out.println(
