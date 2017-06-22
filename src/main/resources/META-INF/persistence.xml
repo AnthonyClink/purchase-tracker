@@ -24,7 +24,7 @@
 			<property name="javax.persistence.jdbc.password" value="" />
 
 
-                        <!-- create ddl on demand. A side affect of this is the first call to the dao layer will take a while
+                        <!-- create ddl on demand. A side affect of this is the first call to the dao layer will take a while -->
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="eclipselink.create-ddl-jdbc-file-name"
 				value="createDDL_ddlGeneration.jdbc" />
